@@ -30,7 +30,7 @@ function App() {
         {/* Footer */}
         <Navbar bg="primary" variant="dark">
           <Container>
-            <Navbar.Brand>&copy; All right reserved 2021</Navbar.Brand>
+            <Navbar.Brand className="mx-auto">&copy; All right reserved 2021</Navbar.Brand>
           </Container>
         </Navbar>
       </div>
