@@ -21,3 +21,12 @@ a {
   text-decoration: none;
 }
 
+/* Ratings */
+.card-text span {
+  color: #f0c040;
+  margin: 0.1rem;
+}
+.card-text span:last-child {
+  color: #404040;
+}
+

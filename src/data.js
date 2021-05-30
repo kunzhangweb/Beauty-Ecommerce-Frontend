@@ -9,7 +9,7 @@ const data = {
       price: 70,
       countInStock: 10,
       brand: "Shiseido",
-      rating: 4.5,
+      rating: 3.5,
       numReviews: 10,
       description:
         "Benefiance Wrinkle Smoothing Cream Enriched delivers deep hydration and fresh ingredients to dry skin to promote a radiant and youthful look. Targeting fine lines, the moisturizer is infused with ReNeura Technology+™ and KOMBU-Bounce Complex to ensure resilience and prevent future wrinkles.",
