@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
 export default function Product(props) {
@@ -9,13 +10,13 @@ export default function Product(props) {
     <Col lg={4} key={product._id}>
       {/* display a single product item */}
       <Card className="m-2">
-        <a href={`/product/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <Card.Img variant="top" src={product.image} alt={product.name} />
-        </a>
+        </Link>
         <Card.Body>
-          <a href={`/product/${product._id}`}>
+          <Link to={`/product/${product._id}`}>
             <Card.Title>{product.name}</Card.Title>
-          </a>
+          </Link>
           <Card.Text>
             <Rating
               rating={product.rating}
