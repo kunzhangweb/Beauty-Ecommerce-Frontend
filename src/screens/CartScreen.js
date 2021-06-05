@@ -29,11 +29,11 @@ export default function CartScreen(props) {
 
   // proceed to the checkout page
   const checkoutHandler = () => {
-    props.history.push("/signin?redirect=shipping");
+    props.history.push("/login?redirect=shipping");
   };
 
   return (
-    <Row>
+    <Row className="container min-vh-100">
       {/* List of cart items */}
       <Col lg={9}>
         <h2>Shopping Cart</h2>
@@ -42,7 +42,7 @@ export default function CartScreen(props) {
             The shopping cart is empty. <Link to="/">Continue Shopping</Link>
           </MessageBox>
         ) : (
-          <ul class="list-unstyled">
+          <ul className="list-unstyled">
             {cartItems.map((item) => (
               <li key={item.product}>
                 <Row>
@@ -86,7 +86,7 @@ export default function CartScreen(props) {
                       variant="outline-danger"
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      <i class="fa fa-trash">
+                      <i className="fa fa-trash">
                         <span className="mx-1"></span>
                       </i>
                       Delete
@@ -113,8 +113,6 @@ export default function CartScreen(props) {
               onClick={checkoutHandler}
               disabled={cartItems.length === 0}
             >
-              <i class="fa fa-credit-card" aria-hidden="true"></i>
-              <span className="mx-1"></span>
               Proceed To Checkout
             </Button>
           </ListGroup.Item>

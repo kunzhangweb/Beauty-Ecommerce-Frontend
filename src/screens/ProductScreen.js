@@ -32,7 +32,7 @@ export default function ProductScreen(props) {
       ) : (
         <>
           <Link to="/">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <i className="fa fa-arrow-left" aria-hidden="true"></i>
             <span className="mx-1"></span>Back to Results
           </Link>
           <Row>
@@ -81,7 +81,7 @@ export default function ProductScreen(props) {
                       <span className="m-1">Quantity</span>
                       <span>
                         <select
-                          class="form-select"
+                          className="form-select"
                           value={qty}
                           onChange={(event) => setQty(event.target.value)}
                         >

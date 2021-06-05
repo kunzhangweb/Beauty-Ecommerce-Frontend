@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import { BrowserRouter, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -6,22 +5,29 @@ import CartScreen from "./screens/CartScreen";
 
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import SignupScreen from "./screens/SigupScreen";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="h-100">
+      <div className="content">
         <Header />
-
-        <Container style={{ height: "100%", width: "100%", margin: "1rem" }}>
+        <div className="p-2">
           <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/product/:id" component={ProductScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/login" component={LoginScreen}></Route>
-        </Container>
+          <Route path="/signup" component={SignupScreen}></Route>
+          <Route path="/shipping" component={ShippingAddressScreen}></Route>
+          <Route path="/payment" component={PaymentMethodScreen}></Route>
+          <Route path="/order" component={PlaceOrderScreen}></Route>
+        </div>
 
-        <Footer />       
+        <Footer />
       </div>
     </BrowserRouter>
   );

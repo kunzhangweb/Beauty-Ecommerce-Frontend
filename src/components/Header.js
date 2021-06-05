@@ -35,12 +35,12 @@ export default function Header() {
           <Navbar.Text>
             {userInfo ? (
               <Dropdown>
-                <Dropdown.Toggle variant="primary">
+                <Dropdown.Toggle variant="primary" href="#">
                   {userInfo.name}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="/login" onClick={logoutHandler} className="text-dark">
+                  <Dropdown.Item href="#logout" onClick={logoutHandler} className="text-dark">
                     Log Out
                   </Dropdown.Item>
                 </Dropdown.Menu>

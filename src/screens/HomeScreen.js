@@ -17,7 +17,7 @@ export default function HomeScreen() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -29,6 +29,6 @@ export default function HomeScreen() {
           ))}
         </Row>
       )}
-    </>
+    </div>
   );
 }
