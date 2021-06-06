@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { placeOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { PLACE_ORDER_RESET } from "../constants/orderConstants";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -20,12 +24,20 @@ export default function PlaceOrderScreen(props) {
   cart.taxPrice = calPrice(cart.itemsPrice * 0.09);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
-
+  const orderCreated = useSelector((state) => state.placeOrder);
+  const { loading, success, error, order } = orderCreated;
+  const dispatch = useDispatch();
   // place the order
   const placeOrderHandler = () => {
+    dispatch(placeOrder({ ...cart, orderItems: cart.cartItems }));
+  };
+  useEffect(() => {
+    if (success) {
+      props.history.push(`/order/${order._id}`);
+      dispatch({ type: PLACE_ORDER_RESET });
+    }
+  }, [success, order, props.history, dispatch]);
 
-  }
-  
   return (
     <div className="container min-vh-100 min-vw-100">
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -147,7 +159,15 @@ export default function PlaceOrderScreen(props) {
                   </div>
                 </div>
               </Card.Text>
-              <Button variant="warning" className="w-100" onClick={placeOrderHandler}>Place Order</Button>
+              <Button
+                variant="warning"
+                className="w-100"
+                onClick={placeOrderHandler}
+              >
+                Place Order
+              </Button>
+              {loading && <LoadingBox></LoadingBox>}
+              {error && <MessageBox variant="danger">{error}</MessageBox>}
             </Card.Body>
           </Card>
         </Col>
