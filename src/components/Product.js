@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, Col } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 import Rating from "./Rating";
 
 export default function Product(props) {
@@ -18,12 +19,15 @@ export default function Product(props) {
             <Card.Title>{product.name}</Card.Title>
           </Link>
           <Card.Text>
-            <Rating
-              rating={product.rating}
-              numReviews={product.numReviews}
-            />
+            <Rating rating={product.rating} numReviews={product.numReviews} />
           </Card.Text>
-          <Card.Text>${product.price}</Card.Text>
+
+          <Row>
+            <Card.Text>${product.price}</Card.Text>
+            {/* <Link to={`/seller/${product.seller._id}`}>
+              <Card.Title>{product.seller.seller.name}</Card.Title>
+            </Link> */}
+          </Row>
         </Card.Body>
       </Card>
     </Col>

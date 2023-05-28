@@ -1,90 +1,58 @@
 const data = {
-  products: [
+  categories: [
+    "Brands",
+    "Skin Care",
+    "Makeup",
+    "Health",
+    "Body Care",
+    "Face Mask",
+    "Oral Care",
+    "Medical",
+  ],
+  prices: [
     {
-      _id: "1",
-      name: "Benefiance Wrinkle Smoothing Cream",
-      category: "Brands",
-      image: "/images/ShiseidoBenefianceWrinkleSmoothingCreamEnriched.png",
-      sku: "730852149540",
-      price: 70,
-      countInStock: 10,
-      brand: "Shiseido",
-      rating: 3.5,
-      numReviews: 10,
-      description:
-        "Benefiance Wrinkle Smoothing Cream Enriched delivers deep hydration and fresh ingredients to dry skin to promote a radiant and youthful look. Targeting fine lines, the moisturizer is infused with ReNeura Technology+™ and KOMBU-Bounce Complex to ensure resilience and prevent future wrinkles.",
+      range: 'Any',
+      min: 0,
+      max: 0,
     },
     {
-      _id: "2",
-      name: "Sulwhasoo Skin Reinforcing Set for Men",
-      category: "Skin Care",
-      image: "/images/SulwhasooSkinReinforcingSetMen.jpg",
-      sku: "8809685815051",
-      price: 120,
-      countInStock: 12,
-      brand: "Sulwhasoo",
-      rating: 4.0,
-      numReviews: 16,
-      description:
-        "Our Men's face care collection features multi-use products that help address a variety of ... Skin Reinforcing Emulsion for Men.",
+      range: `$1 to $10`,
+      min: 1,
+      max: 10,
     },
     {
-      _id: "3",
-      name: "Gongjinhyang:Mi Essential Primer Whoo",
-      category: "Makeup",
-      image: "/images/MiEssentialPrimerWhoo.jpg",
-      sku: "8801051416701",
-      price: 48,
-      countInStock: 11,
-      brand: "WHOO",
-      rating: 4.0,
-      numReviews: 21,
-      description:
-        "This primer supports natural cellular vitality, protects against free radicals and works to help tone the skin and refine facial features, creating a luminous, flawless canvas for comfortable, long-lasting color.",
+      range: `$10 to $100`,
+      min: 10,
+      max: 100,
     },
     {
-      _id: "4",
-      name: "STEAM WARMING BACK PATCH LAVENDER",
-      category: "Makeup",
-      image: "/images/KaoBackPatchLavenderScent.jpg",
-      sku: "4901301348128",
-      price: 12.99,
-      countInStock: 8,
-      brand: "KAO",
-      rating: 4.5,
-      numReviews: 50,
-      description:
-        "Combined with a relaxing scent of lavender, the self-warming Kao Steam Warming Back Mask  comfortably envelopes your back with warm steam of about 40°C to soothe aching bones, relieve stress, and ease tension. Use this at the end of the day or take a break with this mask to feel more relaxed! This product may be used before going to bed, while traveling, or while simply relaxing at home. It’s great to use after a long day of staring at the computer or at any other digital devices.",
-    },
-    {
-      _id: "5",
-      name: "One Push kit #4C cnnamon brown 80g",
-      category: "Hair Care",
-      image: "/images/OnePushKit4CcnnamonBrown.jpg",
-      sku: "033859001041",
-      price: 10,
-      countInStock: 50,
-      brand: "Bigen",
-      rating: 4.0,
-      numReviews: 30,
-      description:
-        "Innovative ONE PUSH bottle empowers you to color your hair on a whim.",
-    },
-    {
-      _id: "6",
-      name: "AXXZIA Venus Recipe Plus AG Drink 30 Bags",
-      category: "Health",
-      image: "/images/AGDrink.jpg",
-      sku: "4560413151097",
-      price: 212.50,
-      countInStock: 6,
-      brand: "AXXZIA",
-      rating: 4.5,
-      numReviews: 29,
-      description:
-        "Healthy drink by Axxzia for nutrition and health.",
+      range: `$100 to $1000`,
+      min: 100,
+      max: 1000,
     },
   ],
+
+  ratings: [
+    {
+      range: '4stars & up',
+      rating: 4,
+    },
+  
+    {
+      range: '3stars & up',
+      rating: 3,
+    },
+  
+    {
+      range: '2stars & up',
+      rating: 2,
+    },
+  
+    {
+      range: '1stars & up',
+      rating: 1,
+    },
+  ]
 };
 
 export default data;

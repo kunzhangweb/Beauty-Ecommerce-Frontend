@@ -51,12 +51,13 @@ export default function LoginScreen(props) {
             </Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to="/forgot-password">Forgot Password?</Link>
+            {/* <Link to="/forgot-password">Forgot Password?</Link> */}
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Need an account? <Link to={`/signup?redirect=${redirect}`}>Sign Up</Link>
+        Need an account?{" "}
+        <Link to={`/signup?redirect=${redirect}`}>Sign Up</Link>
       </div>
     </div>
   );

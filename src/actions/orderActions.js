@@ -1,6 +1,24 @@
 import axios from "axios";
 
 import {
+  MY_ORDER_LIST_FAIL,
+  MY_ORDER_LIST_REQUEST,
+  MY_ORDER_LIST_SUCCESS,
+  ORDER_DELETE_FAIL,
+  ORDER_DELETE_REQUEST,
+  ORDER_DELETE_SUCCESS,
+  ORDER_DELIVERY_FAIL,
+  ORDER_DELIVERY_REQUEST,
+  ORDER_DELIVERY_SUCCESS,
+  ORDER_DETAILS_FAIL,
+  ORDER_DETAILS_REQUEST,
+  ORDER_DETAILS_SUCCESS,
+  ORDER_LIST_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  PAY_ORDER_FAIL,
+  PAY_ORDER_REQUEST,
+  PAY_ORDER_SUCCESS,
   PLACE_ORDER_FAIL,
   PLACE_ORDER_REQUEST,
   PLACE_ORDER_SUCCESS,
@@ -27,7 +45,7 @@ export const placeOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: CART_EMPTY,
     });
-    localStorage.removeItem('cartItems');
+    localStorage.removeItem("cartItems");
   } catch (error) {
     dispatch({
       type: PLACE_ORDER_FAIL,
@@ -38,3 +56,140 @@ export const placeOrder = (order) => async (dispatch, getState) => {
     });
   }
 };
+
+export const detailOrder = (orderId) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.get(`/api/orders/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
+  }
+};
+
+export const payOrder =
+  (order, paymentResult) => async (dispatch, getState) => {
+    dispatch({ type: PAY_ORDER_REQUEST, payload: { order, paymentResult } });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    try {
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/pay`,
+        paymentResult,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      dispatch({ type: PAY_ORDER_SUCCESS, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({ type: PAY_ORDER_FAIL, payload: message });
+    }
+  };
+
+export const listMyOrders = () => async (dispatch, getState) => {
+  dispatch({ type: MY_ORDER_LIST_REQUEST });
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.get("/api/orders/mine", {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: MY_ORDER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: MY_ORDER_LIST_FAIL, payload: message });
+  }
+};
+
+export const listOrders = ({ seller = ''}) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_LIST_REQUEST });
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.get(`/api/orders?seller=${seller}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: ORDER_LIST_FAIL, payload: message });
+  }
+};
+
+export const deleteOrder = (orderId) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_DELETE_REQUEST, payload: orderId });
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  try {
+    const data = await axios.delete(`/api/order/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: ORDER_DELETE_FAIL, payload: message });
+  }
+};
+
+export const deliverOrder = (orderId) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_DELIVERY_REQUEST, payload: orderId });
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  try {
+    const data = await axios.put(`/api/order/${orderId}/deliver`, {}, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: ORDER_DELIVERY_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: ORDER_DELIVERY_FAIL, payload: message });
+  }
+}
