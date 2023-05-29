@@ -15,7 +15,7 @@ import { listTopSellers } from "../actions/userActions";
 export default function HomeScreen(props) {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
-
+  console.log(productList);
   const userTopSellersList = useSelector((state) => state.userTopSellersList);
   const {
     loading: sellerLoading,

@@ -26,6 +26,7 @@ import {
   USER_TOPSELLERS_LIST_SUCCESS,
   USER_TOPSELLERS_LIST_FAIL,
 } from "../constants/userConstants";
+import { BACKEND_URL } from "../constants/backendUrl";
 
 export const login = (email, password) => async (dispatch) => {
   dispatch({
@@ -34,7 +35,10 @@ export const login = (email, password) => async (dispatch) => {
   });
 
   try {
-    const { data } = await axios.post("/api/users/login", { email, password });
+    const { data } = await axios.post(BACKEND_URL + "/api/users/login", {
+      email,
+      password,
+    });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -64,7 +68,7 @@ export const signup = (name, email, password) => async (dispatch) => {
   });
 
   try {
-    const { data } = await axios.post("/api/users/signup", {
+    const { data } = await axios.post(BACKEND_URL + "/api/users/signup", {
       name,
       email,
       password,
@@ -90,7 +94,7 @@ export const detailUser = (userId) => async (dispatch, getState) => {
     userLogin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.get(`/api/users/${userId}`, {
+    const { data } = await axios.get(BACKEND_URL + `/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: USER_DETAIL_SUCCESS, payload: data });
@@ -112,7 +116,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     userLogin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.put("/api/users/profile", user, {
+    const { data } = await axios.put(BACKEND_URL + "/api/users/profile", user, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: data });
@@ -137,7 +141,7 @@ export const listUsers = () => async (dispatch, getState) => {
     userLogin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.get("/api/users", {
+    const { data } = await axios.get(BACKEND_URL + "/api/users", {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: LIST_USER_SUCCESS, payload: data });
@@ -157,7 +161,7 @@ export const deleteUser = (userId) => (dispatch, getState) => {
   } = getState();
 
   try {
-    const { data } = axios.delete(`/api/users/${userId}`, {
+    const { data } = axios.delete(BACKEND_URL + `/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: DELETE_USER_SUCCESS, payload: data });
@@ -177,7 +181,7 @@ export const updateUserPrivilege = (user) => (dispatch, getState) => {
   } = getState();
 
   try {
-    const { data } = axios.put(`/api/users/${user._id}`, user, {
+    const { data } = axios.put(BACKEND_URL + `/api/users/${user._id}`, user, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: UPDATE_USER_PRIVILEGE_SUCCESS, payload: data });
@@ -194,7 +198,7 @@ export const listTopSellers = () => (dispatch) => {
   dispatch({ type: USER_TOPSELLERS_LIST_REQUEST });
 
   try {
-    const { data } = axios.get("/api/users/top-sellers");
+    const { data } = axios.get(BACKEND_URL + "/api/users/top-sellers");
     dispatch({ type: USER_TOPSELLERS_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
